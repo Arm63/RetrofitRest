@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "777205913268",
+    "firebase_url": "https://myfiredata-ec4e3.firebaseio.com",
+    "project_id": "myfiredata-ec4e3",
+    "storage_bucket": "myfiredata-ec4e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777205913268:android:74c8530f8beb5abb5c29e1",
+        "android_client_info": {
+          "package_name": "com.example.retrofitrest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777205913268-r9qisp8smrcs5260mnoh4k37oqi0hrue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.retrofitrest",
+            "certificate_hash": "8e2919bc1d2225fa10515ba81cf6b7a5023b3cea"
+          }
+        },
+        {
+          "client_id": "777205913268-jhk1daj0419mpsa0gajbicdfum1d4eoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2Un8gcTIVWr_pJjab9v_4d8F2Fr-XYC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777205913268-jhk1daj0419mpsa0gajbicdfum1d4eoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
