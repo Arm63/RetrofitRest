@@ -1,40 +1,27 @@
 package com.example.retrofitrest.ui.view.fragment
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.retrofitrest.R
 import com.example.retrofitrest.data.model.Recipe
 import com.example.retrofitrest.ui.RecipeViewModel
-import com.example.retrofitrest.ui.view.activity.MainActivity
+import com.example.retrofitrest.utils.Constants.TransactData.BUNDLE_KEY
+import com.example.retrofitrest.utils.Constants.TransactData.REQUEST_KEY
 import kotlinx.android.synthetic.main.fragment_recipe_info.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecipeInfoFragment : BaseFragment() {
 
     companion object {
-        private var INSTANCE: RecipeInfoFragment? = null
-        fun getInstance(): RecipeInfoFragment {
-            if (INSTANCE == null)
-                INSTANCE = RecipeInfoFragment()
-            return INSTANCE as RecipeInfoFragment
-        }
+        private val LOG_TAG: String = RecipeInfoFragment::class.java.simpleName
     }
 
-    private var id: Int? = null
+    private var mRecipe: Recipe? = null
     private val mViewModelRecipe by viewModel<RecipeViewModel>()
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        (activity as MainActivity).lockDrawer()
-    }
+    private lateinit var mMenuFavorite: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,24 +29,39 @@ class RecipeInfoFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_recipe_info, container, false)
-
         loadData()
         return view
     }
 
     private fun loadData() {
-        setFragmentResultListener("requestKey") { key, bundle ->
-            id = bundle.getInt("bundleKey")
-            mViewModelRecipe.getRecipe(id!!).observe(viewLifecycleOwner, {
-                initView(it)
-            })
+        setFragmentResultListener(REQUEST_KEY) { key, bundle ->
+                mRecipe = bundle.getParcelable(BUNDLE_KEY)
+                initView(mRecipe!!)
+
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_recipe_item, menu)
+        mMenuFavorite = menu.findItem(R.id.menu_recipe_favorite)
+        if (mRecipe?.favorite!!) {
+            mMenuFavorite.setIcon(R.drawable.ic_favorite)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.menu_recipe_favorite -> {
+                if (mRecipe?.favorite!!) {
+                    mMenuFavorite.setIcon(R.drawable.ic_unfavorite)
+                    mRecipe!!.favorite = false
+                } else {
+                    mMenuFavorite.setIcon(R.drawable.ic_favorite)
+                    mRecipe!!.favorite = true
+                }
+            }
         }
+        mRecipe?.let { mViewModelRecipe.updateRecipe(it) }
         return super.onOptionsItemSelected(item)
     }
 
@@ -74,9 +76,4 @@ class RecipeInfoFragment : BaseFragment() {
         tv_recipe_description.text = recipe.description
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-//        (activity as MainActivity).unlockDrawer()
-
-    }
 }

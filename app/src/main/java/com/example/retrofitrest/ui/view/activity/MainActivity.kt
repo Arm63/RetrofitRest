@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.retrofitrest.R
+import com.example.retrofitrest.ui.view.fragment.RecipeInfoFragment
 import com.example.retrofitrest.ui.view.fragment.RecipeListFragment
 import com.example.retrofitrest.utils.FragmentTransactionManager
 import com.google.android.material.navigation.NavigationView
@@ -27,9 +28,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     // Fields
     // ===========================================================
 
-    private val instance by inject<RecipeListFragment>()
-    private val instance1 by inject<RecipeListFragment>()
-    private val instance2 by inject<RecipeListFragment>()
+    private val recipeListFragment by inject<RecipeListFragment>()
 
 
     // ===========================================================
@@ -50,7 +49,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         customizeActionBar()
         initDrawer()
         openScreen(
-            instance,
+            recipeListFragment,
             R.id.nav_recipe_list,
             false
         )
@@ -86,13 +85,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_recipe_list -> {
-                if (!instance.isVisible) {
+                if (!recipeListFragment.isVisible) {
                     openScreen(
-                        instance,
+                        recipeListFragment,
                         R.id.nav_recipe_list,
                         false
                     )
-                    Log.d("instance", instance.toString())
+                    Log.d("instance", recipeListFragment.toString())
                 }
             }
         }

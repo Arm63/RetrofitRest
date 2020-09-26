@@ -28,6 +28,7 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeHolder>() {
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
+
     }
 
     override fun getItemCount(): Int {
@@ -47,8 +48,13 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeHolder>() {
 
             itemView.tv_recipe_item_name.text = item.name
             itemView.tv_recipe_item_price.text = item.price.toString()
+
             itemView.ll_recipe_item_container.setOnClickListener {
                 onItemClickListener?.onItemClick(item, adapterPosition)
+            }
+            itemView.ll_recipe_item_container.setOnLongClickListener {
+                onItemClickListener?.onItemLongClick(item, adapterPosition)
+                true
             }
         }
 
@@ -62,5 +68,6 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(item: Recipe, position: Int)
+        fun onItemLongClick(item: Recipe, position: Int)
     }
 }

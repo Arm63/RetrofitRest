@@ -2,7 +2,6 @@ package com.example.retrofitrest.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.retrofitrest.data.model.Recipe
 import com.example.retrofitrest.data.repository.implementation.RecipeRepositoryImpl
@@ -13,6 +12,7 @@ import kotlinx.coroutines.launch
 class RecipeViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository: RecipeRepositoryImpl = InjectorUtils.provideRepository(application)
+
 
     fun load() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,6 +31,12 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
     fun updateRecipe(recipe: Recipe) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateRecipe(recipe)
+        }
+    }
+
+    fun deleteRecipe(recipe: Recipe) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteRecipe(recipe)
         }
     }
 

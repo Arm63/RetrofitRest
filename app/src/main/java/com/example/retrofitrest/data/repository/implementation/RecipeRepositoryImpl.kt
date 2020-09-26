@@ -3,7 +3,6 @@ package com.example.retrofitrest.data.repository.implementation
 import com.example.retrofitrest.data.RecipeDatabase
 import com.example.retrofitrest.data.api.APIService
 import com.example.retrofitrest.data.model.Recipe
-import com.example.retrofitrest.data.repository.`interface`.RecipeRepositoryI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -35,6 +34,7 @@ class RecipeRepositoryImpl(private val database: RecipeDatabase, private val ser
 
     fun getRecipes() = database.userDao().getAllData()
 
+
     fun getRecipe(id: Int) = database.userDao().getItem(id)
 
     fun isDbEmpty() = database.userDao().isDbEmpty()
@@ -42,5 +42,9 @@ class RecipeRepositoryImpl(private val database: RecipeDatabase, private val ser
 
     suspend fun updateRecipe(recipe: Recipe) {
         database.userDao().updateRecipe(recipe)
+    }
+
+    suspend fun deleteRecipe(recipe: Recipe) {
+        database.userDao().deleteRecipe(recipe)
     }
 }

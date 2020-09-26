@@ -7,7 +7,13 @@ class Constants {
     }
 
     object DataBase {
-        const val RECIPE_DATABASE = "RECIPE_DB"
+        const val RECIPE_DATABASE = "RecipeDB"
+        const val RECIPE_TABLE = "RECIPE_TABLE"
+    }
+
+    object TransactData {
+        const val REQUEST_KEY = "REQUEST_KEY"
+        const val BUNDLE_KEY = "BUNDLE_KEY"
         const val RECIPE_TABLE = "RECIPE_TABLE"
     }
 }

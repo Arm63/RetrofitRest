@@ -11,16 +11,16 @@ import com.example.retrofitrest.data.model.Recipe
 import com.example.retrofitrest.utils.Constants.DataBase.RECIPE_DATABASE
 
 
-@Database(entities = [Recipe::class], version = 5, exportSchema = false)
+@Database(entities = [Recipe::class], version = 15, exportSchema = false)
 abstract class RecipeDatabase : RoomDatabase() {
 
     abstract fun userDao(): RecipeDao
 
     companion object {
-//        private val MIGRATION_2_4: Migration = object : Migration(2, 4) {
+//        private val MIGRATION_X: Migration = object : Migration(5, 20) {
 //            override fun migrate(database: SupportSQLiteDatabase) {
 //                database.execSQL(
-//                    "ALTER TABLE 'RECIPE_TABLE' ADD COLUMN 'description' TEXT NOT NUll default 1"
+//                    "ALTER TABLE 'RECIPE_TABLE' ADD COLUMN 'favorite' Integer NOT NULL default -1"
 //                )
 //            }
 //        }
@@ -39,7 +39,7 @@ abstract class RecipeDatabase : RoomDatabase() {
                     RecipeDatabase::class.java,
                     RECIPE_DATABASE
                 )
-//                    .addMigrations(MIGRATION_2_4)
+//                    .addMigrations(MIGRATION_X)
                     .build()
                 INSTANCE = instance
 

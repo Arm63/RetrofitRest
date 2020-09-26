@@ -15,18 +15,21 @@ data class Recipe(
 	@field:SerializedName("id")
 	val id: Int,
 
-	@field:SerializedName("price")
-	var price: Int,
-
-	@field:SerializedName("name")
-	var name: String,
-
 	@field:SerializedName("image")
 	val image: String,
+
+	@field:SerializedName("price")
+	val price: Int,
+
+	@field:SerializedName("name")
+	val name: String,
 
 	@field:SerializedName("description")
 	val description: String,
 
+	@field:SerializedName("favorite")
+    var favorite: Boolean,
+
 	@field:SerializedName("from_user")
 	val fromUser: Boolean
-) : Parcelable
+):Parcelable
